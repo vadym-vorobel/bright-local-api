@@ -1,6 +1,6 @@
 {
   "name": "bright-local-api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "NodeJS wrapper for BrightLocal API",
   "keywords": [
     "brightlocal",
@@ -13,9 +13,15 @@
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile"
   },
-  "keywords": [],
   "author": "Vadym Vorobel <vadym@jssolutionsdev.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alonoslav/bright-local-api"
+  },
+  "bugs": {
+    "url": "https://github.com/alonoslav/bright-local-api/issues"
+  },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "promise-polyfill": "^6.0.2",
