@@ -18,7 +18,8 @@ const HTTP_METHODS = {
 
 export class Api {
   constructor(apiKey, apiSecret, endpoint = '') {
-    this.allowedHttpMethods = Object.keys(HTTP_METHODS).map(key => HTTP_METHODS[key]);
+    this.allowedHttpMethods = Object.keys(HTTP_METHODS).map(key =>
+      HTTP_METHODS[key]);
 
     this.endpoint = endpoint || ENDPOINT;
     this.apiKey = apiKey;
@@ -37,7 +38,9 @@ export class Api {
 
     const sig = hash.toString(cryptoJs.enc.Base64);
 
-    return { sig, expires };
+    return {
+      sig, expires
+    };
   }
 
   /**
@@ -58,7 +61,9 @@ export class Api {
     // sig and expires to those methods
     const sigAndExpires = this._getSigAndExpires();
 
-    const requestParams = Object.assign({ 'api-key': this.apiKey }, params, sigAndExpires);
+    const requestParams = Object.assign({
+      'api-key': this.apiKey
+    }, params, sigAndExpires);
 
     const requestUrl = `${this.endpoint}/${methodName.replace('/', '')}`;
 
@@ -67,12 +72,13 @@ export class Api {
     const options = {
       uri: requestUrl,
       json: true,
+      method: httpMethod,
       [requestKey]: requestParams,
     };
 
     return new Promise((resolve, reject) => {
       request(options, (error, response, body) => {
-        if(error) {
+        if (error) {
           reject(new Error(`[bright-local-api]#call Error: ${error}`));
         } else {
           resolve(body);
