@@ -1,6 +1,6 @@
 {
   "name": "bright-local-api",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "NodeJS wrapper for BrightLocal API",
   "keywords": [
     "brightlocal",

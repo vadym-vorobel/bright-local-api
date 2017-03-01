@@ -56,9 +56,9 @@ export class V4 {
    * @param {number} batchId
    * @return boolean
    */
-  deleteRequest(batchId) {
+  delete(batchId) {
     return new Promise((resolve) => {
-      this.api.deleteRequest('/v4/batch', { 'batch-id': batchId })
+      this.api.delete('/v4/batch', { 'batch-id': batchId })
         .then(response => resolve(response.success))
         .catch((error) => {
           throw new Error(`Error while deleting the batch: ${error}`);

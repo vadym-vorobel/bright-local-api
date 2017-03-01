@@ -119,7 +119,7 @@ export class Api {
    * @param {object} params
    * @return Promise
    */
-  deleteRequest(method, params = {}) {
+  delete(method, params = {}) {
     return this.call(method, params, HTTP_METHODS.DELETE);
   }
 
