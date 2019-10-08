@@ -31,7 +31,7 @@ export class V4 {
   commit(batchId) {
     return new Promise((resolve) => {
       this.api.put('/v4/batch', { 'batch-id': batchId })
-        .then(response => resolve(response.status))
+        .then(response => resolve(response.success))
         .catch((error) => {
           throw new Error(`Error while commiting the batch: ${error}`);
         });
@@ -44,8 +44,8 @@ export class V4 {
    */
   getResults(batchId) {
     return new Promise((resolve) => {
-      this.api.get('/v1/get-batch-results', { 'batch-id': batchId })
-        .then(response => resolve(response.status))
+      this.api.get('/v4/batch', { 'batch-id': batchId })
+        .then(response => resolve(response))
         .catch((error) => {
           throw new Error(`Error while getting result from the batch: ${error}`);
         });
