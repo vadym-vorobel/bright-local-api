@@ -6,23 +6,28 @@ export class V4 {
     this.api = api;
   }
 
-  /**
-   * @param {boolean} stopOnJobError
-   * @return boolean|number
-   */
-  create(stopOnJobError = false) {
-    return new Promise((resolve) => {
-      this.api.call('/v4/batch', { 'stop-on-job-error': Number(stopOnJobError) })
-        .then((response) => {
-          const batchId = response.success && response['batch-id'];
+    /**
+     * @param {boolean} stopOnJobError
+     * @param {string} callback
+     * @return boolean|number
+     */
+    create(stopOnJobError = false, callback = '') {
+        return new Promise((resolve) => {
+            let data = { 'stop-on-job-error': Number(stopOnJobError) };
+            if (callback.length > 4) {
+                data.callback = callback;
+            }
+            this.api.call('/v4/batch', data)
+                .then((response) => {
+                    const batchId = response.success && response['batch-id'];
 
-          resolve(batchId);
-        })
-        .catch((error) => {
-          throw new Error(`Error while creating the batch: ${error}`);
+                    resolve(batchId);
+                })
+                .catch((error) => {
+                    throw new Error(`Error while creating the batch: ${error}`);
+                });
         });
-    });
-  }
+    }
 
   /**
    * @param {number} batchId
