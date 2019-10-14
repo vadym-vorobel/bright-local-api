@@ -14,7 +14,7 @@ export class V4 {
     create(stopOnJobError = false, callback = '') {
         return new Promise((resolve) => {
             let data = { 'stop-on-job-error': Number(stopOnJobError) };
-            if (callback.length !== '') {
+            if (callback !== '') {
                 data.callback = callback;
             }
             this.api.call('/v4/batch', data)
