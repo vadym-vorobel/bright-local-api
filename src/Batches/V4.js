@@ -6,28 +6,30 @@ export class V4 {
     this.api = api;
   }
 
-    /**
-     * @param {boolean} stopOnJobError
-     * @param {string} callback
-     * @return boolean|number
-     */
-    create(stopOnJobError = false, callback = '') {
-        return new Promise((resolve) => {
-            let data = { 'stop-on-job-error': Number(stopOnJobError) };
-            if (callback !== '') {
-                data.callback = callback;
-            }
-            this.api.call('/v4/batch', data)
-                .then((response) => {
-                    const batchId = response.success && response['batch-id'];
+  /**
+   * @param {boolean} stopOnJobError
+   * @param {string} callback
+   * @return boolean|number
+   */
+  create(stopOnJobError = false, callback = '') {
+    return new Promise((resolve) => {
+      const data = { 'stop-on-job-error': Number(stopOnJobError) };
 
-                    resolve(batchId);
-                })
-                .catch((error) => {
-                    throw new Error(`Error while creating the batch: ${error}`);
-                });
+      if (callback !== '') {
+        data.callback = callback;
+      }
+      
+      this.api.call('/v4/batch', data)
+        .then((response) => {
+          const batchId = response.success && response['batch-id'];
+
+          resolve(batchId);
+        })
+        .catch((error) => {
+          throw new Error(`Error while creating the batch: ${error}`);
         });
-    }
+    });
+  }
 
   /**
    * @param {number} batchId
@@ -38,7 +40,7 @@ export class V4 {
       this.api.put('/v4/batch', { 'batch-id': batchId })
         .then(response => resolve(response.success))
         .catch((error) => {
-          throw new Error(`Error while commiting the batch: ${error}`);
+          throw new Error(`Error while committing the batch: ${error}`);
         });
     });
   }
